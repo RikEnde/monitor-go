@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [[ -z "$1" ]]; then 
+	PORT="8888"
+else
+	PORT="$1"
+fi
+
+go run monitor.go -port $PORT
+
