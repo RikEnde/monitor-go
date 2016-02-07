@@ -2,6 +2,17 @@
         <head>
 			<title>{{.Title}}</title>
 		</head>
-        <body>{{.Body}}</body>
+        <body>
+			<h2>Available services</h2>
+			<table>
+				{{range .Links}}
+				<tr>
+					<td><a href="{{.Url}}">{{.Url}}</a></td>
+					<td>{{.Desc}}</td>
+				</tr>
+				{{end}}
+			</table>
+			<p>Your request: {{.Request}}</p>
+		</body>
 </html>
 

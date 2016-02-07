@@ -103,19 +103,19 @@ func index(w http.ResponseWriter, r *http.Request) {
 	}
 
 	title := "CPU Status REST service"
-	body := make([]string, 4)
-	body = append(body, `Supported services:<br>`)
-	body = append(body, `<a href="/cpu">/cpu</a> query cpuinfo`)
-	body = append(body, `<a href="/cpu/0/cpu%20mhz">/cpu/0/cpu mhz</a> query mHz of cpu 0<br>`)
-	body = append(body, `<a href="/stat">/stat</a> query cpustat`)
-	body = append(body, `<a href="/stat/cpu">/stat/cpu</a> query jiffies aggregate over all cores<br>`)
-	body = append(body, `<a href="/history">/history</a> query diffies over past hour<br>`)
-	body = append(body, `<a href="/temperature">/temperature</a> query cpu core temperature<br>`)
-	body = append(body, `<a href="/frequency">/frequency</a> query cpu clock frequency<br>`)
-	body = append(body, `<a href="/graph">/graph</a> graph<br>`)
-	body = append(body, `Your request: `+r.URL.Path[1:])
+	body := []t.Link{
+		t.Link{Url: "/cpu", Desc: "query cpuinfo"},
+		t.Link{Url: "/cpu/0/cpu%20mhz", Desc: "query mHz of cpu 0"},
+		t.Link{Url: "/stat", Desc: "query cpustat"},
+		t.Link{Url: "/stat/cpu", Desc: "query jiffies aggregate over all cores"},
+		t.Link{Url: "/history", Desc: "query diffies over past hour"},
+		t.Link{Url: "/temperature", Desc: "query cpu core temperature"},
+		t.Link{Url: "/frequency", Desc: "query cpu clock frequency"},
+		t.Link{Url: "/graph", Desc: "graph diffies over past 24 hours"},
+	}
 
-	p := t.MakePage(title, strings.Join(body, "<br>"))
+	p := t.MakePage(title, body, fmt.Sprintf("%s", r))
+
 	t.RenderTemplate(w, "index", p)
 }
 

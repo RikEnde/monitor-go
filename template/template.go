@@ -6,12 +6,18 @@ import (
 )
 
 type Page struct {
-	Title string
-	Body  template.HTML
+	Title   string
+	Links   []Link
+	Request template.HTML
 }
 
-func MakePage(title string, body string) *Page {
-	return &Page{Title: title, Body: template.HTML(body)}
+type Link struct {
+	Url  string
+	Desc string
+}
+
+func MakePage(title string, links []Link, request string) *Page {
+	return &Page{Title: title, Links: links, Request: template.HTML(request)}
 }
 
 func RenderTemplate(w http.ResponseWriter, tmpl string, p *Page) {
