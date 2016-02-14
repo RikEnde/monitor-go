@@ -12,6 +12,7 @@ import (
 	"os"
 	"runtime"
 	"strings"
+	"time"
 )
 
 func readInput(prompt string) string {
@@ -53,7 +54,7 @@ func main() {
 		TLSClientConfig:    &tls.Config{InsecureSkipVerify: true},
 		DisableCompression: true,
 	}
-	client := &http.Client{Transport: tr}
+	client := &http.Client{Transport: tr, Timeout: 10 * time.Second}
 
 	request, err := http.NewRequest("GET", url, nil)
 	request.SetBasicAuth(*user, *password)
