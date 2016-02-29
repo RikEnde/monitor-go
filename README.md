@@ -49,7 +49,7 @@ Example: {"santa":"a0121a95b0bea2bf240dcbbcea9abfc12ffda9fb"}
 Generate a hash with tool.go 
 
 Database credentials are expected to be in json format in a file in the same directory called postgres. 
-Example: {"user":"dbuser", "password":"dbpassword", "database":"dbname"}
+Example: {"user":"dbuser", "password":"dbpassword", "database":"dbname", "host":"localhost"}
 
 
 # Makefile 

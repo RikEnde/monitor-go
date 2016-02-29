@@ -30,7 +30,7 @@ type CpuInfo struct {
 
 func DbInfo() string {
 	cred := u.DbCredentials()
-	return fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable", cred["user"], cred["password"], cred["database"])
+	return fmt.Sprintf("host=%s user=%s password=%s dbname=%s sslmode=disable", cred["host"], cred["user"], cred["password"], cred["database"])
 }
 
 func diffies(s s.CpuStat, l s.CpuStat) (float64, float64, float64, float64, float64, float64, float64) {

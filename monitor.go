@@ -103,6 +103,7 @@ func index(w http.ResponseWriter, r *http.Request) {
 	}
 
 	title := "CPU Status REST service"
+
 	body := []t.Link{
 		t.Link{Url: "/cpu", Desc: "query cpuinfo"},
 		t.Link{Url: "/cpu/0/cpu%20mhz", Desc: "query mHz of cpu 0"},
