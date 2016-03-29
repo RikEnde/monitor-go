@@ -3,6 +3,7 @@ package graph
 import (
 	"fmt"
 	db "monitor/storage"
+	"strings"
 	"time"
 )
 
@@ -15,12 +16,16 @@ func (p Point) String() string {
 	return fmt.Sprintf("%d,%d", p.x, p.y)
 }
 
-func String(Points []Point) []string {
-	l := make([]string, len(Points))
-	for i, p := range Points {
+func String(points []Point) []string {
+	l := make([]string, len(points))
+	for i, p := range points {
 		l[i] = p.String()
 	}
 	return l
+}
+
+func Join(points []Point) string {
+	return strings.Join(String(points), " ")
 }
 
 func Graph(width int, height int) ([]Point, []Point, []Point, []Point) {

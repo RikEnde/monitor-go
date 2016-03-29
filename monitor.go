@@ -219,13 +219,16 @@ func graph(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 
 	box, user, temperature, iowait := g.Graph(width, height)
+	data := t.Graph{
+		Box:         g.Join(box),
+		Temperature: g.Join(temperature),
+		User:        g.Join(user),
+		Iowait:      g.Join(iowait),
+		Height:      height,
+		Width:       width,
+	}
 
-	fmt.Fprintf(w, "<html><head></head><body><svg xmlns='http://www.w3.org/2000/svg' style='stroke: grey; fill: white; stroke-width: 0.5' width='%d' height='%d'>\n", width, height)
-	fmt.Fprintf(w, "<polygon Points='%s' style='stroke:black; fill: none; stroke-width: 0.5'/>\n", strings.Join(g.String(box), " "))
-	fmt.Fprintf(w, "<polygon Points='%s' style='stroke:#800000; fill: red; stroke-width: 0.5'/>\n", strings.Join(g.String(user), " "))
-	fmt.Fprintf(w, "<polygon Points='%s' style='stroke:black; fill: none; stroke-width: 0.5'/>\n", strings.Join(g.String(temperature), " "))
-	fmt.Fprintf(w, "<polygon Points='%s' style='stroke:#000800; fill: green; stroke-width: 0.5'/>\n", strings.Join(g.String(iowait), " "))
-	fmt.Fprintf(w, "</svg></body></html>\n")
+	t.Flap(w, "graph", data)
 }
 
 func startServer(ch chan string, port string) {
