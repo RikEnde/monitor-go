@@ -48,8 +48,7 @@ func main() {
 		log.Printf("%s\nConnecting to %s\n", runtime.GOROOT(), url)
 	}
 
-	// Skip the verification of the certificate because the only way to make
-	// that work is to pay a root CA to sign it for me and fuck that
+	// We're going to accept self signed certificates
 	tr := &http.Transport{
 		TLSClientConfig:    &tls.Config{InsecureSkipVerify: true},
 		DisableCompression: true,
